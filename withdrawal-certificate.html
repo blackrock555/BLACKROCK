@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal Certificate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --teal-primary: #00d4d4;
+            --teal-light: #4de8e8;
+            --teal-dark: #008b8b;
+            --gold-primary: #d4a500;
+            --gold-light: #ffc107;
+            --gold-dark: #b8860b;
+            --white: #ffffff;
+            --white-muted: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a1a;
+            padding: 40px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .certificate-container {
+            width: 900px;
+            height: 640px;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8),
+                        0 0 0 1px rgba(0, 212, 212, 0.1);
+        }
+
+        /* Geometric Polygonal Shapes - Left Side */
+        .geometric-shapes {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .polygon {
+            position: absolute;
+            opacity: 0.9;
+        }
+
+        .polygon-1 {
+            width: 0;
+            height: 0;
+            border-left: 120px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 200px solid #0d3d4d;
+            top: -20px;
+            left: -40px;
+            transform: rotate(-15deg);
+        }
+
+        .polygon-2 {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 180px solid #0a5e6e;
+            top: 80px;
+            left: 20px;
+            transform: rotate(10deg);
+        }
+
+        .polygon-3 {
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 160px solid #087080;
+            top: 200px;
+            left: -30px;
+            transform: rotate(-25deg);
+        }
+
+        .polygon-4 {
+            width: 0;
+            height: 0;
+            border-left: 90px solid transparent;
+            border-right: 70px solid transparent;
+            border-bottom: 150px solid #0d4a5a;
+            top: 320px;
+            left: 40px;
+            transform: rotate(5deg);
+        }
+
+        .polygon-5 {
+            width: 0;
+            height: 0;
+            border-left: 110px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 190px solid #063a45;
+            top: 420px;
+            left: -20px;
+            transform: rotate(-10deg);
+        }
+
+        .polygon-6 {
+            width: 0;
+            height: 0;
+            border-left: 70px solid transparent;
+            border-right: 90px solid transparent;
+            border-bottom: 140px solid #0a6070;
+            top: 150px;
+            left: 100px;
+            transform: rotate(20deg);
+        }
+
+        .polygon-7 {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 120px solid #0d5565;
+            top: 500px;
+            left: 80px;
+            transform: rotate(-5deg);
+        }
+
+        /* Subtle glow effect */
+        .geometric-glow {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background: radial-gradient(ellipse at left center,
+                rgba(0, 180, 180, 0.15) 0%,
+                transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Certificate Content */
+        .certificate-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 60px 40px 120px;
+            text-align: center;
+        }
+
+        .certificate-header {
+            margin-bottom: 25px;
+        }
+
+        .certificate-title {
+            font-family: 'Cinzel', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--teal-primary);
+            letter-spacing: 8px;
+            text-shadow: 0 0 40px rgba(0, 212, 212, 0.3);
+            margin-bottom: 5px;
+        }
+
+        .certificate-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--white);
+            letter-spacing: 12px;
+            text-transform: uppercase;
+        }
+
+        .presented-to {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--teal-light);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        .recipient-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 56px;
+            color: var(--white);
+            padding: 10px 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .recipient-name::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent,
+                var(--teal-primary) 20%,
+                var(--teal-primary) 80%,
+                transparent);
+        }
+
+        .withdrawal-amount {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin: 20px 0 15px 0;
+            text-shadow: 0 0 30px rgba(255, 193, 7, 0.3);
+        }
+
+        .certificate-description {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--white-muted);
+            line-height: 1.9;
+            max-width: 520px;
+            margin: 15px auto;
+            letter-spacing: 0.5px;
+        }
+
+        .official-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--white);
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Signatures Section */
+        .signatures-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            max-width: 600px;
+            margin-top: auto;
+            padding-top: 25px;
+        }
+
+        .signature-block {
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .signature-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .signature-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--teal-primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Medal/Ribbon Seal */
+        .medal-container {
+            position: relative;
+            width: 80px;
+            height: 100px;
+        }
+
+        .ribbon {
+            position: absolute;
+            bottom: 0;
+            width: 25px;
+            height: 45px;
+        }
+
+        .ribbon-left {
+            left: 10px;
+            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+            transform: rotate(-15deg);
+            transform-origin: top center;
+        }
+
+        .ribbon-right {
+            right: 10px;
+            background: linear-gradient(225deg, var(--gold-dark) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+            transform: rotate(15deg);
+            transform-origin: top center;
+        }
+
+        .medal {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65px;
+            height: 65px;
+            background: radial-gradient(ellipse at 30% 30%,
+                var(--gold-light) 0%,
+                var(--gold-primary) 40%,
+                var(--gold-dark) 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(212, 165, 0, 0.4),
+                        inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .medal::before {
+            content: '';
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .medal-inner {
+            width: 45px;
+            height: 45px;
+            background: radial-gradient(ellipse at 30% 30%,
+                var(--gold-primary) 0%,
+                var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .medal-star {
+            color: var(--gold-light);
+            font-size: 24px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Decorative corner accents */
+        .corner-accent {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(0, 212, 212, 0.2);
+        }
+
+        .corner-top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .certificate-container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <!-- Geometric Polygonal Shapes -->
+        <div class="geometric-shapes">
+            <div class="polygon polygon-1"></div>
+            <div class="polygon polygon-2"></div>
+            <div class="polygon polygon-3"></div>
+            <div class="polygon polygon-4"></div>
+            <div class="polygon polygon-5"></div>
+            <div class="polygon polygon-6"></div>
+            <div class="polygon polygon-7"></div>
+        </div>
+        <div class="geometric-glow"></div>
+
+        <!-- Corner Accents -->
+        <div class="corner-accent corner-top-right"></div>
+        <div class="corner-accent corner-bottom-right"></div>
+
+        <!-- Certificate Content -->
+        <div class="certificate-content">
+            <div class="certificate-header">
+                <h1 class="certificate-title">CERTIFICATE</h1>
+                <h2 class="certificate-subtitle">of Withdrawal</h2>
+            </div>
+
+            <p class="presented-to">Is Presented To :</p>
+
+            <div class="recipient-name">Jacq Thompson</div>
+
+            <div class="withdrawal-amount">$12,500.00</div>
+
+            <p class="certificate-description">
+                This certificate confirms that the above-named trader has successfully
+                completed a verified withdrawal from their funded trading account.
+                This achievement demonstrates consistent profitability and adherence to
+                all risk management protocols.
+            </p>
+
+            <p class="official-text">Official BlackRock Funded Trader Withdrawal</p>
+
+            <!-- Signatures Section -->
+            <div class="signatures-section">
+                <div class="signature-block">
+                    <p class="signature-name">Barth Fenderson</p>
+                    <p class="signature-title">General Instructor</p>
+                </div>
+
+                <div class="medal-container">
+                    <div class="ribbon ribbon-left"></div>
+                    <div class="ribbon ribbon-right"></div>
+                    <div class="medal">
+                        <div class="medal-inner">
+                            <span class="medal-star">★</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="signature-block">
+                    <p class="signature-name">Martha Stewart</p>
+                    <p class="signature-title">Creative Director</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
