@@ -94,9 +94,9 @@ export const DEFAULT_SETTINGS = {
     BEP20: 0.5,
   },
   networkDepositAddresses: {
-    ERC20: '0xD31ac3Ae422953F60d090d99a401C8a6b53b7A82',
-    TRC20: 'TJ8NdhBMJ7X9dJZ28oTveT9gn5e9woxvSx',
-    BEP20: '0xD31ac3Ae422953F60d090d99a401C8a6b53b7A82',
+    ERC20: '0xDE8b3Da180f806caE004E11C35e69FdFAFddc2dc',
+    TRC20: 'TYgnvgebSrTVUwi9BZuW2t1gXHo7H6Wy8j',
+    BEP20: '0xDE8b3Da180f806caE004E11C35e69FdFAFddc2dc',
   },
   transactionLimits: {
     minDeposit: 50,
@@ -124,7 +124,7 @@ export const DEFAULT_SETTINGS = {
     title: 'Markets Closed for the Weekend',
     message: 'Trading markets are currently closed. Profit sharing is paused until markets reopen on Monday. Your investments remain secure.',
   },
-  depositWalletAddress: '0x1eb17E4367F8D6aAF8C3cEC631f8e01103d7A716',
+  depositWalletAddress: '0xDE8b3Da180f806caE004E11C35e69FdFAFddc2dc',
 };
 
 const profitTierSchema = new Schema<IProfitTier>(
@@ -158,9 +158,9 @@ const networkFeesSchema = new Schema<INetworkFees>(
 
 const networkDepositAddressesSchema = new Schema<INetworkDepositAddresses>(
   {
-    ERC20: { type: String, default: '0xD31ac3Ae422953F60d090d99a401C8a6b53b7A82' },
-    TRC20: { type: String, default: 'TJ8NdhBMJ7X9dJZ28oTveT9gn5e9woxvSx' },
-    BEP20: { type: String, default: '0xD31ac3Ae422953F60d090d99a401C8a6b53b7A82' },
+    ERC20: { type: String, default: '0xDE8b3Da180f806caE004E11C35e69FdFAFddc2dc' },
+    TRC20: { type: String, default: 'TYgnvgebSrTVUwi9BZuW2t1gXHo7H6Wy8j' },
+    BEP20: { type: String, default: '0xDE8b3Da180f806caE004E11C35e69FdFAFddc2dc' },
   },
   { _id: false }
 );

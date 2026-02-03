@@ -159,3 +159,11 @@ export function isSameDay(date1: Date, date2: Date): boolean {
     date1.getUTCDate() === date2.getUTCDate()
   );
 }
+
+/**
+ * Check if the current day is a weekend (Saturday or Sunday)
+ */
+export function isWeekend(): boolean {
+  const day = new Date().getDay();
+  return day === 0 || day === 6; // 0 = Sunday, 6 = Saturday
+}

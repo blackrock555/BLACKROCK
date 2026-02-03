@@ -8,6 +8,7 @@ import { rateLimitAsync } from '@/lib/utils/rate-limiter';
 import { sendEmail, isEmailConfigured } from '@/lib/email/transporter';
 import { getVerificationEmailTemplate } from '@/lib/email/templates/verification';
 import { notifyWelcome } from '@/lib/services/notification-service';
+import { sendAdminNotification } from '@/lib/email/notification-service';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -93,6 +94,13 @@ export async function POST(request: NextRequest) {
     } catch (notifyError) {
       console.error('Welcome notification error (non-blocking):', notifyError);
     }
+
+    // Send admin notification (non-blocking)
+    sendAdminNotification({
+      type: 'NEW_USER',
+      userName: name,
+      userEmail: email,
+    }).catch((err) => console.error('Admin notification error (non-blocking):', err));
 
     // Send verification email (skip in dev if email not configured)
     if (!shouldAutoVerify) {

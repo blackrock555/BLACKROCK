@@ -13,6 +13,7 @@ import {
   PortfolioStatsCard,
   RunningTradesCard,
   TradingStatsCard,
+  MarketNewsCard,
   AdminSection,
   WeekendBanner,
 } from "@/components/dashboard";
@@ -364,6 +365,11 @@ function DashboardPageContent() {
           {/* Row 5: Running Positions */}
           <motion.div variants={itemVariants} className="md:col-span-2 xl:col-span-12">
             <RunningTradesCard />
+          </motion.div>
+
+          {/* Row 6: Market News */}
+          <motion.div variants={itemVariants} className="md:col-span-2 xl:col-span-12">
+            <MarketNewsCard />
           </motion.div>
         </motion.div>
       )}

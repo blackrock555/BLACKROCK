@@ -197,7 +197,7 @@ export default function ContactPage() {
                 <p className="text-surface-400 text-sm mb-3">
                   Send us an email and we'll respond within 24-48 hours.
                 </p>
-                <p className="text-brand-400 text-sm font-medium">support@blackrock.com</p>
+                <p className="text-brand-400 text-sm font-medium">info@blackrock5.com</p>
               </motion.div>
 
               <motion.div

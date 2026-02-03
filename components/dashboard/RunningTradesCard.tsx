@@ -8,7 +8,9 @@ import {
   Clock,
   TrendingUp,
   TrendingDown,
+  PauseCircle,
 } from "lucide-react";
+import { isWeekend } from "@/lib/utils/helpers";
 
 // ============ Types ============
 interface SimulatedTrade {
@@ -117,6 +119,7 @@ export function RunningTradesCard() {
   const [isInitialized, setIsInitialized] = useState(false);
   const fluctuationRef = useRef<NodeJS.Timeout | null>(null);
   const hourlyCheckRef = useRef<NodeJS.Timeout | null>(null);
+  const weekend = isWeekend();
 
   // Load or generate trades
   const initializeTrades = useCallback(() => {
@@ -236,6 +239,42 @@ export function RunningTradesCard() {
       }
     };
   }, [isInitialized, startFluctuation, startHourlyCheck]);
+
+  if (weekend) {
+    return (
+      <Card className="h-full flex flex-col">
+        <CardHeader
+          title="Live Positions"
+          subtitle={
+            <span className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1">
+                <span className="w-2 h-2 bg-amber-500 rounded-full" />
+                <span>Markets Closed</span>
+              </span>
+            </span>
+          }
+          compact
+          action={
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30">
+              <PauseCircle className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-bold text-amber-400 tracking-wider">CLOSED</span>
+            </div>
+          }
+        />
+        <CardBody className="flex-1 p-0 overflow-hidden">
+          <div className="p-8 text-center">
+            <div className="w-14 h-14 bg-amber-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <PauseCircle className="w-7 h-7 text-amber-400" />
+            </div>
+            <p className="text-base font-semibold text-white mb-2">Markets Closed</p>
+            <p className="text-sm text-surface-400">
+              Trading markets are closed for the weekend. Positions will resume when markets reopen on Monday.
+            </p>
+          </div>
+        </CardBody>
+      </Card>
+    );
+  }
 
   return (
     <Card className="h-full flex flex-col">

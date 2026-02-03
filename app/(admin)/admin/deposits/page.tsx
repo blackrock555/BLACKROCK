@@ -96,9 +96,9 @@ export default function AdminDepositsPage() {
       if (response.ok) {
         const data = await response.json();
         const addresses = data.data || {
-          ERC20: '0xD31ac3Ae422953F60d090d99a401C8a6b53b7A82',
-          TRC20: 'TJ8NdhBMJ7X9dJZ28oTveT9gn5e9woxvSx',
-          BEP20: '0xD31ac3Ae422953F60d090d99a401C8a6b53b7A82',
+          ERC20: '0xDE8b3Da180f806caE004E11C35e69FdFAFddc2dc',
+          TRC20: 'TYgnvgebSrTVUwi9BZuW2t1gXHo7H6Wy8j',
+          BEP20: '0xDE8b3Da180f806caE004E11C35e69FdFAFddc2dc',
         };
         setNetworkDepositAddresses(addresses);
         setEditedAddresses(addresses);

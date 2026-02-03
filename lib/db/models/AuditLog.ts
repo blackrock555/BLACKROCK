@@ -30,7 +30,8 @@ export type AuditAction =
   | 'SENSITIVE_DATA_EXPORTED'
   | 'KYC_DATA_VIEWED'
   | 'USER_PII_VIEWED'
-  | 'WALLET_ADDRESS_VIEWED';
+  | 'WALLET_ADDRESS_VIEWED'
+  | 'CUSTOM_PROFIT_SHARE';
 
 export interface IAuditLog extends Document {
   _id: mongoose.Types.ObjectId;
@@ -73,6 +74,7 @@ const auditLogSchema = new Schema<IAuditLog>(
         'KYC_DATA_VIEWED',
         'USER_PII_VIEWED',
         'WALLET_ADDRESS_VIEWED',
+        'CUSTOM_PROFIT_SHARE',
       ],
     },
     adminId: {

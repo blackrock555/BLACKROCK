@@ -8,6 +8,7 @@ import {
   FileText,
   Settings,
   MessageCircle,
+  DollarSign,
   LucideIcon,
 } from "lucide-react";
 
@@ -18,6 +19,7 @@ export type AdminView =
   | "kyc"
   | "users"
   | "profit-share"
+  | "custom-profit"
   | "support"
   | "audit-logs"
   | "settings";
@@ -69,6 +71,12 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     label: "Profit Share",
     icon: TrendingUp,
     description: "Manage profit distributions",
+  },
+  {
+    id: "custom-profit",
+    label: "Custom Profit",
+    icon: DollarSign,
+    description: "Apply custom profit to users",
   },
   {
     id: "support",

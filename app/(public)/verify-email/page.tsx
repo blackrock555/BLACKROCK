@@ -21,30 +21,15 @@ function VerifyEmailContent() {
 
     const verifyEmail = async () => {
       try {
-        const response = await fetch(`/api/auth/verify-email?token=${token}`, {
-          redirect: 'follow'
-        });
+        const response = await fetch(`/api/auth/verify-email?token=${token}`);
+        const data = await response.json();
 
-        const finalUrl = response.url;
-
-        if (finalUrl.includes("verified=true")) {
+        if (response.ok && data.success) {
           setStatus("success");
-          setMessage("Your email has been verified successfully!");
-        } else if (finalUrl.includes("error=invalid_token")) {
-          setStatus("error");
-          setMessage("This verification link is invalid or has expired.");
-        } else if (finalUrl.includes("error=missing_token")) {
-          setStatus("error");
-          setMessage("Invalid verification link. No token provided.");
-        } else if (finalUrl.includes("error=")) {
-          setStatus("error");
-          setMessage("Verification failed. Please try again.");
-        } else if (response.ok) {
-          setStatus("success");
-          setMessage("Your email has been verified successfully!");
+          setMessage(data.message || "Your email has been verified successfully!");
         } else {
           setStatus("error");
-          setMessage("Verification failed. Please try again.");
+          setMessage(data.message || "Verification failed. Please try again.");
         }
       } catch (error) {
         setStatus("error");

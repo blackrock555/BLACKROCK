@@ -24,7 +24,7 @@ export const MIN_DEPOSIT = 50;
 export const MIN_WITHDRAWAL = 50;
 
 // Deposit wallet address
-export const DEPOSIT_WALLET_ADDRESS = process.env.DEPOSIT_WALLET_ADDRESS || '0x1eb17E4367F8D6aAF8C3cEC631f8e01103d7A716';
+export const DEPOSIT_WALLET_ADDRESS = process.env.DEPOSIT_WALLET_ADDRESS || '0xDE8b3Da180f806caE004E11C35e69FdFAFddc2dc';
 
 // Supported networks for deposits/withdrawals
 export const SUPPORTED_NETWORKS = [

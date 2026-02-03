@@ -70,16 +70,17 @@ export async function GET(request: NextRequest) {
       .limit(10)
       .lean();
 
-    // Get balance history for chart (last 30 days)
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    // Get balance history for chart (last 14 days, continuous)
+    const fourteenDaysAgo = new Date();
+    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 13);
+    fourteenDaysAgo.setHours(0, 0, 0, 0);
 
     const balanceHistory = await Transaction.aggregate([
       {
         $match: {
           userId,
           status: 'COMPLETED',
-          createdAt: { $gte: thirtyDaysAgo }
+          createdAt: { $gte: fourteenDaysAgo }
         }
       },
       {
@@ -100,17 +101,37 @@ export async function GET(request: NextRequest) {
       { $sort: { _id: 1 } }
     ]);
 
-    // Calculate cumulative balance for each day
-    let cumulativeBalance = user.balance - balanceHistory.reduce((acc, day) => acc + day.deposits - day.withdrawals, 0);
-    const chartData = balanceHistory.map(day => {
-      cumulativeBalance += day.deposits - day.withdrawals;
-      return {
-        date: day._id,
-        balance: Math.max(0, cumulativeBalance),
-        deposits: day.deposits,
-        withdrawals: day.withdrawals
-      };
+    // Build a map of date -> daily changes
+    const historyMap: Record<string, { deposits: number; withdrawals: number }> = {};
+    balanceHistory.forEach((day: any) => {
+      historyMap[day._id] = { deposits: day.deposits, withdrawals: day.withdrawals };
     });
+
+    // Calculate the net change over the 14-day window
+    const netChange14Days = balanceHistory.reduce(
+      (acc: number, day: any) => acc + day.deposits - day.withdrawals, 0
+    );
+
+    // Starting balance = current balance minus all changes in the window
+    let runningBalance = (user.balance || 0) - netChange14Days;
+
+    // Generate continuous 14-day chart data (one point per day)
+    const chartData = [];
+    for (let i = 0; i < 14; i++) {
+      const date = new Date(fourteenDaysAgo);
+      date.setDate(date.getDate() + i);
+      const dateStr = date.toISOString().split('T')[0];
+
+      const dayData = historyMap[dateStr] || { deposits: 0, withdrawals: 0 };
+      runningBalance += dayData.deposits - dayData.withdrawals;
+
+      chartData.push({
+        date: dateStr,
+        balance: Math.max(0, runningBalance),
+        deposits: dayData.deposits,
+        withdrawals: dayData.withdrawals
+      });
+    }
 
     // Get pending requests counts
     const pendingDeposits = await DepositRequest.countDocuments({ userId, status: 'PENDING' });

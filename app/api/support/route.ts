@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth/options';
 import { connectDB } from '@/lib/db/connect';
 import { SupportTicket, User } from '@/lib/db/models';
+import { sendAdminNotification } from '@/lib/email/notification-service';
 
 // GET - List user's support tickets
 export async function GET(request: NextRequest) {
@@ -117,6 +118,15 @@ export async function POST(request: NextRequest) {
     });
 
     await ticket.save();
+
+    // Send admin notification (non-blocking)
+    sendAdminNotification({
+      type: 'NEW_TICKET',
+      userName,
+      userEmail: session.user.email || '',
+      subject,
+      ticketCategory: category || 'GENERAL',
+    }).catch((err) => console.error('Admin notification error (non-blocking):', err));
 
     return NextResponse.json({
       success: true,

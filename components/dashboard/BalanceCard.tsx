@@ -71,7 +71,7 @@ export function BalanceCard({ balance, change, data }: BalanceCardProps) {
           </div>
         </div>
 
-        <BalanceChart data={data} />
+        <BalanceChart data={data} height={200} />
       </CardBody>
     </Card>
   );

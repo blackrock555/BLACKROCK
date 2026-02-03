@@ -11,7 +11,9 @@ import {
   Activity,
   Award,
   Percent,
+  PauseCircle,
 } from "lucide-react";
+import { isWeekend } from "@/lib/utils/helpers";
 
 interface TradingStats {
   winRate: number;
@@ -130,6 +132,7 @@ function CircularProgress({ percentage, size = 60, strokeWidth = 4 }: {
 export function TradingStatsCard() {
   const [stats, setStats] = useState<TradingStats | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const weekend = isWeekend();
 
   useEffect(() => {
     // Try to load from localStorage
@@ -302,16 +305,23 @@ export function TradingStatsCard() {
     <Card className="h-full">
       <CardHeader
         title="Trading Performance"
-        subtitle="Real-time trading metrics"
+        subtitle={weekend ? "Markets closed for the weekend" : "Real-time trading metrics"}
         compact
         action={
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="text-xs text-surface-400">Live</span>
-          </div>
+          weekend ? (
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30">
+              <PauseCircle className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-bold text-amber-400 tracking-wider">CLOSED</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-xs text-surface-400">Live</span>
+            </div>
+          )
         }
       />
       <CardBody>

@@ -10,6 +10,7 @@ import {
   getPlatformToggles,
 } from "@/lib/services/settings-service";
 import { notifyWithdrawalPending } from "@/lib/services/notification-service";
+import { sendAdminNotification } from "@/lib/email/notification-service";
 import { rateLimitAsync } from "@/lib/utils/rate-limiter";
 
 export async function POST(request: NextRequest) {
@@ -128,6 +129,15 @@ export async function POST(request: NextRequest) {
 
     // Create notification for pending withdrawal
     await notifyWithdrawalPending(session.user.id, amount, network);
+
+    // Send admin notification (non-blocking)
+    sendAdminNotification({
+      type: 'NEW_WITHDRAWAL',
+      userName: user.name || 'User',
+      userEmail: user.email || '',
+      amount,
+      network,
+    }).catch((err) => console.error('Admin notification error (non-blocking):', err));
 
     return NextResponse.json({
       success: true,

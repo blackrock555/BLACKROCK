@@ -9,7 +9,10 @@ export async function GET(request: NextRequest) {
     const token = request.nextUrl.searchParams.get('token');
 
     if (!token) {
-      return NextResponse.redirect(new URL('/login?error=missing_token', request.url));
+      return NextResponse.json(
+        { error: 'missing_token', message: 'Invalid verification link. No token provided.' },
+        { status: 400 }
+      );
     }
 
     await connectDB();
@@ -21,7 +24,10 @@ export async function GET(request: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.redirect(new URL('/login?error=invalid_token', request.url));
+      return NextResponse.json(
+        { error: 'invalid_token', message: 'This verification link is invalid or has expired.' },
+        { status: 400 }
+      );
     }
 
     // Verify email
@@ -88,9 +94,15 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.redirect(new URL('/login?verified=true', request.url));
+    return NextResponse.json(
+      { success: true, message: 'Your email has been verified successfully!' },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Email verification error:', error);
-    return NextResponse.redirect(new URL('/login?error=verification_failed', request.url));
+    return NextResponse.json(
+      { error: 'verification_failed', message: 'Verification failed. Please try again.' },
+      { status: 500 }
+    );
   }
 }

@@ -6,6 +6,7 @@ import { DepositRequest } from "@/lib/db/models";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { getTransactionLimits, isFeatureEnabled } from "@/lib/services/settings-service";
 import { notifyDepositPending } from "@/lib/services/notification-service";
+import { sendAdminNotification } from "@/lib/email/notification-service";
 import { rateLimitAsync } from "@/lib/utils/rate-limiter";
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
@@ -120,6 +121,15 @@ export async function POST(request: NextRequest) {
 
     // Create notification for pending deposit
     await notifyDepositPending(session.user.id, amount, network);
+
+    // Send admin notification (non-blocking)
+    sendAdminNotification({
+      type: 'NEW_DEPOSIT',
+      userName: session.user.name || 'User',
+      userEmail: session.user.email || '',
+      amount,
+      network,
+    }).catch((err) => console.error('Admin notification error (non-blocking):', err));
 
     return NextResponse.json({
       success: true,

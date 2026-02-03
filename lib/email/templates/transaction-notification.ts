@@ -1,3 +1,5 @@
+import { getEmailLogoHeader } from './shared';
+
 export function getDepositApprovedEmailTemplate({
   name,
   amount,
@@ -16,9 +18,7 @@ export function getDepositApprovedEmailTemplate({
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #09090b;">
       <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <div style="background-color: #18181b; border-radius: 12px; padding: 40px; border: 1px solid #27272a;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #6366f1; font-size: 28px; font-weight: bold; margin: 0;">BLACKROCK</h1>
-          </div>
+          ${getEmailLogoHeader()}
 
           <div style="text-align: center; margin-bottom: 20px;">
             <div style="width: 60px; height: 60px; background-color: #10b98120; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">
@@ -75,9 +75,7 @@ export function getWithdrawalApprovedEmailTemplate({
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #09090b;">
       <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <div style="background-color: #18181b; border-radius: 12px; padding: 40px; border: 1px solid #27272a;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #6366f1; font-size: 28px; font-weight: bold; margin: 0;">BLACKROCK</h1>
-          </div>
+          ${getEmailLogoHeader()}
 
           <div style="text-align: center; margin-bottom: 20px;">
             <div style="width: 60px; height: 60px; background-color: #10b98120; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">
@@ -144,9 +142,7 @@ export function getRequestRejectedEmailTemplate({
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #09090b;">
       <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <div style="background-color: #18181b; border-radius: 12px; padding: 40px; border: 1px solid #27272a;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #6366f1; font-size: 28px; font-weight: bold; margin: 0;">BLACKROCK</h1>
-          </div>
+          ${getEmailLogoHeader()}
 
           <h2 style="color: #ffffff; font-size: 24px; margin: 0 0 20px 0; text-align: center;">
             ${typeLabels[type]} Request Update

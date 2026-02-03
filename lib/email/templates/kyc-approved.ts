@@ -1,3 +1,5 @@
+import { getEmailLogoHeader } from './shared';
+
 export function getKYCApprovedEmailTemplate({
   name,
   dashboardUrl,
@@ -17,9 +19,7 @@ export function getKYCApprovedEmailTemplate({
       <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <div style="background-color: #18181b; border-radius: 12px; padding: 40px; border: 1px solid #27272a;">
           <!-- Logo -->
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #6366f1; font-size: 28px; font-weight: bold; margin: 0;">BLACKROCK</h1>
-          </div>
+          ${getEmailLogoHeader()}
 
           <!-- Success Icon -->
           <div style="text-align: center; margin-bottom: 20px;">

@@ -6,6 +6,7 @@ export { PortfolioStatsCard } from "./PortfolioStatsCard";
 export { NotificationsCard } from "./NotificationsCard";
 export { RunningTradesCard } from "./RunningTradesCard";
 export { TradingStatsCard } from "./TradingStatsCard";
+export { MarketNewsCard } from "./MarketNewsCard";
 export { DashboardHeader } from "./DashboardHeader";
 export { WeekendBanner } from "./WeekendBanner";
 

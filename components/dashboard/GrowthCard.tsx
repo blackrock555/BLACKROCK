@@ -98,7 +98,9 @@ export function GrowthCard({ currentGrowth, data }: GrowthCardProps) {
             </div>
             <div>
               <h3 className="text-white font-semibold text-base">Monthly Growth</h3>
-              <p className="text-[#4a4a4a] text-xs">Last 6 months ROI performance</p>
+              <p className="text-[#4a4a4a] text-xs">
+                Current Month ROI: <span className={isPositive ? "text-emerald-400" : "text-red-400"}>{isPositive ? "+" : ""}{currentGrowth.toFixed(2)}%</span>
+              </p>
             </div>
           </div>
 

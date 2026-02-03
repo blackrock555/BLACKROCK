@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { TradeNotification } from "@/components/ui";
 import { generateRandomTrade } from "@/lib/mockData";
+import { isWeekend } from "@/lib/utils/helpers";
 
 interface UseTradeNotificationsOptions {
   minInterval?: number;
@@ -21,6 +22,7 @@ export function useTradeNotifications({
 
   const addNotification = useCallback(() => {
     if (!isActiveRef.current) return;
+    if (isWeekend()) return;
 
     const trade = generateRandomTrade();
     const notification: TradeNotification = {
@@ -42,6 +44,7 @@ export function useTradeNotifications({
 
   const scheduleNextNotification = useCallback(() => {
     if (!isActiveRef.current) return;
+    if (isWeekend()) return;
 
     const randomDelay =
       Math.floor(Math.random() * (maxInterval - minInterval)) + minInterval;
@@ -56,6 +59,9 @@ export function useTradeNotifications({
   }, []);
 
   useEffect(() => {
+    // Don't start notifications on weekends
+    if (isWeekend()) return;
+
     isActiveRef.current = true;
 
     // Start the first notification after a short delay

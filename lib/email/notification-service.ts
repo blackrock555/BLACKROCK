@@ -5,7 +5,9 @@ import {
   getDepositApprovedEmailTemplate,
   getWithdrawalApprovedEmailTemplate,
   getOTPVerificationEmailTemplate,
+  getAdminNotificationEmailTemplate,
 } from './templates';
+import { AdminNotificationType } from './templates/admin-notification';
 
 const APP_URL = process.env.NEXTAUTH_URL || 'http://localhost:3000';
 
@@ -194,6 +196,66 @@ export async function sendOTPEmail({
     return true;
   } catch (error) {
     console.error(`[Email] Failed to send OTP email to ${email}:`, error);
+    return false;
+  }
+}
+
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@blackrock5.com';
+
+const adminSubjects: Record<AdminNotificationType, string> = {
+  NEW_USER: 'New User Registration',
+  NEW_DEPOSIT: 'New Deposit Request',
+  NEW_WITHDRAWAL: 'New Withdrawal Request',
+  NEW_TICKET: 'New Support Ticket',
+};
+
+/**
+ * Sends an admin notification email (non-blocking)
+ */
+export async function sendAdminNotification({
+  type,
+  userName,
+  userEmail,
+  amount,
+  network,
+  subject,
+  ticketCategory,
+}: {
+  type: AdminNotificationType;
+  userName: string;
+  userEmail: string;
+  amount?: number;
+  network?: string;
+  subject?: string;
+  ticketCategory?: string;
+}): Promise<boolean> {
+  if (!isEmailConfigured) {
+    console.log(`[Email] Skipping admin notification (${type}) - SMTP not configured`);
+    return false;
+  }
+
+  try {
+    const html = getAdminNotificationEmailTemplate({
+      type,
+      userName,
+      userEmail,
+      amount,
+      network,
+      subject,
+      ticketCategory,
+    });
+
+    await sendEmail({
+      to: ADMIN_EMAIL,
+      subject: `[BLACKROCK Admin] ${adminSubjects[type]} - ${userName}`,
+      html,
+      text: `${adminSubjects[type]}: ${userName} (${userEmail})${amount ? ` - $${amount}` : ''}`,
+    });
+
+    console.log(`[Email] Admin notification (${type}) sent to ${ADMIN_EMAIL}`);
+    return true;
+  } catch (error) {
+    console.error(`[Email] Failed to send admin notification (${type}):`, error);
     return false;
   }
 }

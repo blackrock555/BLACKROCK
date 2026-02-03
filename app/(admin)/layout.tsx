@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Users,
   TrendingUp,
+  HandCoins,
   FileText,
   Settings,
   ChevronLeft,
@@ -29,6 +30,7 @@ const ADMIN_NAV = [
   { href: "/admin/kyc", label: "Pending KYC", icon: ShieldCheck },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/profit-share", label: "Profit Share", icon: TrendingUp },
+  { href: "/admin/custom-profit", label: "Custom Profit", icon: HandCoins },
   { href: "/admin/audit-logs", label: "Audit Logs", icon: FileText },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
