@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db/connect';
 import { getPublicSettings } from '@/lib/services/settings-service';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/settings/public
  * Returns non-sensitive settings for frontend use
