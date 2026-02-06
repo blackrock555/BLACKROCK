@@ -13,6 +13,9 @@ import { notifyWithdrawalPending } from "@/lib/services/notification-service";
 import { sendAdminNotification } from "@/lib/email/notification-service";
 import { rateLimitAsync } from "@/lib/utils/rate-limiter";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);

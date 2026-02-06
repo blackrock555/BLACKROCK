@@ -5,6 +5,9 @@ import { connectDB } from '@/lib/db/connect';
 import { SupportTicket, User } from '@/lib/db/models';
 import { sendAdminNotification } from '@/lib/email/notification-service';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // GET - List user's support tickets
 export async function GET(request: NextRequest) {
   try {

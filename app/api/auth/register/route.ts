@@ -10,6 +10,9 @@ import { getVerificationEmailTemplate } from '@/lib/email/templates/verification
 import { notifyWelcome } from '@/lib/services/notification-service';
 import { sendAdminNotification } from '@/lib/email/notification-service';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const isDev = process.env.NODE_ENV !== 'production';
 
 export async function POST(request: NextRequest) {

@@ -5,6 +5,9 @@ import { connectDB } from '@/lib/db/connect';
 import { User } from '@/lib/db/models';
 import { uploadToCloudinary, deleteFromCloudinary } from '@/lib/cloudinary';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 

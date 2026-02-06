@@ -5,6 +5,9 @@ import { connectDB } from "@/lib/db/connect";
 import { ProfitShareLedger, User } from "@/lib/db/models";
 import { getProfitTiers } from "@/lib/services/settings-service";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);

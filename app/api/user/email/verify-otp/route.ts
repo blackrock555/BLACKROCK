@@ -7,6 +7,9 @@ import bcrypt from 'bcryptjs';
 import { verifyOtpSchema } from '@/lib/validators/auth';
 import { sendWelcomeEmail } from '@/lib/email/notification-service';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const MAX_OTP_ATTEMPTS = 5;
 const OTP_LOCKOUT_MINUTES = 30;
 

@@ -8,6 +8,9 @@ import crypto from 'crypto';
 import { sendOTPEmail } from '@/lib/email/notification-service';
 import { getOtpSettings } from '@/lib/services/settings-service';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);

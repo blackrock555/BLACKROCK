@@ -5,6 +5,9 @@ import { connectDB } from '@/lib/db/connect';
 import { User } from '@/lib/db/models';
 import { rateLimitAsync } from '@/lib/utils/rate-limiter';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Hash token for comparison with stored hash
 function hashToken(token: string): string {
   return crypto.createHash('sha256').update(token).digest('hex');

@@ -5,6 +5,9 @@ import { connectDB } from "@/lib/db/connect";
 import { User, Transaction, DepositRequest, WithdrawalRequest, AuditLog } from "@/lib/db/models";
 import mongoose from "mongoose";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Maximum balance adjustment allowed without super admin approval
 const MAX_BALANCE_ADJUSTMENT = 10000;
 // Maximum bonus amount allowed per grant

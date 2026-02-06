@@ -4,6 +4,9 @@ import { authOptions } from '@/lib/auth/options';
 import { connectDB } from '@/lib/db/connect';
 import { SupportTicket } from '@/lib/db/models';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // GET - Get a specific support ticket
 export async function GET(
   request: NextRequest,

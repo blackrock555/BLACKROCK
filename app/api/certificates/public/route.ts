@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db/connect';
 import WithdrawalCertificate from '@/lib/db/models/WithdrawalCertificate';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // GET - Fetch recent approved certificates for public display
 export async function GET(request: NextRequest) {
   try {

@@ -5,6 +5,9 @@ import { connectDB } from "@/lib/db/connect";
 import { User, KYCRequest } from "@/lib/db/models";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 

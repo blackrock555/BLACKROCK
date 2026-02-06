@@ -5,6 +5,9 @@ import { connectDB } from '@/lib/db/connect';
 import { AuditLog } from '@/lib/db/models';
 import { getSettings, updateSettings } from '@/lib/services/settings-service';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 type Params = {
   params: Promise<{ section: string }>;
 };

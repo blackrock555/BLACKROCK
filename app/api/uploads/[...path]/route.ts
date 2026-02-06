@@ -4,6 +4,9 @@ import { authOptions } from '@/lib/auth/options';
 import { readFile, stat } from 'fs/promises';
 import path from 'path';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Serve uploaded files (KYC documents, deposit proofs, etc.)
 export async function GET(
   request: NextRequest,

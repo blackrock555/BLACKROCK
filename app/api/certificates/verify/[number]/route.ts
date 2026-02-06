@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db/connect";
 import { verifyCertificate } from "@/lib/services/certificate-generator";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Public endpoint - no auth required
 export async function GET(
   request: NextRequest,

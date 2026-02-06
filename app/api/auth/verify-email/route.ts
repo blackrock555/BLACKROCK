@@ -4,6 +4,9 @@ import { User, ReferralReward } from '@/lib/db/models';
 import { getReferralTier } from '@/lib/constants';
 import { sendWelcomeEmail } from '@/lib/email/notification-service';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: NextRequest) {
   try {
     const token = request.nextUrl.searchParams.get('token');

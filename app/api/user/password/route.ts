@@ -6,6 +6,9 @@ import { User } from "@/lib/db/models";
 import { changePasswordSchema } from "@/lib/validators/auth";
 import bcrypt from "bcryptjs";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const MAX_PASSWORD_ATTEMPTS = 5;
 const PASSWORD_LOCKOUT_MINUTES = 30;
 

@@ -4,6 +4,9 @@ import { authOptions } from '@/lib/auth/options';
 import { uploadToCloudinary, UploadFolder } from '@/lib/cloudinary';
 import { rateLimitAsync } from '@/lib/utils/rate-limiter';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const ALLOWED_TYPES = [
   'image/jpeg',
   'image/png',

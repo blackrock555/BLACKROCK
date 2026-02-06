@@ -6,6 +6,9 @@ import { User, ProfitShareLedger, Transaction } from "@/lib/db/models";
 import { getProfitTierForBalance, isFeatureEnabled } from "@/lib/services/settings-service";
 import { notifyProfitShare } from "@/lib/services/notification-service";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Only POST method allowed for cron jobs (security best practice)
 export async function POST(request: NextRequest) {
   return handleProfitShare(request);

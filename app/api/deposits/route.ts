@@ -9,6 +9,9 @@ import { notifyDepositPending } from "@/lib/services/notification-service";
 import { sendAdminNotification } from "@/lib/email/notification-service";
 import { rateLimitAsync } from "@/lib/utils/rate-limiter";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 

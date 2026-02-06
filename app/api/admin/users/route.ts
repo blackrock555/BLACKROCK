@@ -4,6 +4,9 @@ import { authOptions } from "@/lib/auth/options";
 import { connectDB } from "@/lib/db/connect";
 import { User } from "@/lib/db/models";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Escape special regex characters to prevent NoSQL injection
 function escapeRegex(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

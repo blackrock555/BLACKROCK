@@ -4,6 +4,9 @@ import { authOptions } from '@/lib/auth/options';
 import { connectDB } from '@/lib/db/connect';
 import { User } from '@/lib/db/models';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const OTP_COOLDOWN_SECONDS = 60;
 const MAX_OTP_ATTEMPTS = 5;
 

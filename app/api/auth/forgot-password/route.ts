@@ -6,6 +6,9 @@ import { generateToken } from '@/lib/utils/helpers';
 import { rateLimitAsync } from '@/lib/utils/rate-limiter';
 import { sendEmail, isEmailConfigured } from '@/lib/email/transporter';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Hash token for secure storage (one-way hash)
 function hashToken(token: string): string {
   return crypto.createHash('sha256').update(token).digest('hex');

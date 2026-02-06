@@ -4,6 +4,9 @@ import { authOptions } from '@/lib/auth/options';
 import { connectDB } from '@/lib/db/connect';
 import { SupportTicket, User } from '@/lib/db/models';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // POST - Add a reply to a support ticket
 export async function POST(
   request: NextRequest,
